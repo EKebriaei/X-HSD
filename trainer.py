@@ -167,7 +167,7 @@ class Trainer():
 
         loss /= iters_per_epoch
         f1 = f1_score(labels_all, y_pred_all, average='macro')
-        target_names = ['OFF', 'NOT']
+        target_names = ['OFF', 'HATE']
         np.savetxt(str(epoch)+'.out', y_pred_all, delimiter=',') 
         
         # offset = 1000
