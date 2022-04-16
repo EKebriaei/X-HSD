@@ -56,7 +56,7 @@ if __name__ == '__main__':
     os.environ["CUDA_VISIBLE_DEVICES"] = args['cuda']
     device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
 
-    num_labels = 3 if task == 'c' else 2
+    num_labels = 3 
 
     # Set tokenizer for different models
     if model_name == 'bert':
