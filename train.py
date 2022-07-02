@@ -5,9 +5,9 @@ from torch.utils.data import DataLoader
 from data import task_a, read_test_file
 from config import *
 from cli import get_args
-from utils import load
+from utils import load, save_tokenizer
 from datasets import HuggingfaceDataset, ImbalancedDatasetSampler
-from models.bert import BERT, RoBERTa, XLM_RoBERTa, MultilingualBERT, GE_BERT, ParsBERT
+from models.bert import BERT, RoBERTa, XLM_RoBERTa, MultilingualBERT, GE_BERT, ParsBERT, BERTTWEET_FA
 from transformers import BertTokenizer, RobertaTokenizer, XLMRobertaTokenizer, get_cosine_schedule_with_warmup
 from trainer import Trainer
 
@@ -84,6 +84,12 @@ if __name__ == '__main__':
         print(f'using bert-{model_size}-parsbert-uncased.')
         model = ParsBERT(model_size, args=args, num_labels=num_labels)
         tokenizer = XLMRobertaTokenizer.from_pretrained(f'bert-base-parsbert-uncased')
+        assert tokenizer != None
+    elif model_name == 'bert-tweet':
+        print(f'using bert-tweet-farsi.')
+        model = BERTTWEET_FA(model_size, args=args, num_labels=num_labels)
+        tokenizer = BertTokenizer.from_pretrained('arm-on/BERTweet-FA', model_max_length=130)
+        save_tokenizer(tokenizer, './save/tokenizer')
         assert tokenizer != None
     elif model_name == 'bert-multilingual':
         print(f'using bert-{model_size}-multilingual-uncased model.')

@@ -3,6 +3,16 @@ import pickle
 import torch
 import numpy as np
 
+def save_hugging_face(model, dirname):
+    if not os.path.exists(dirname):
+        os.makedirs(dirname)
+    model.save(dirname)
+
+def save_tokenizer(tokenizer, dirname):
+    if not os.path.exists(dirname):
+        os.makedirs(dirname)
+    tokenizer.save_pretrained(dirname)
+
 def save(toBeSaved, filename, mode='wb'):
     dirname = os.path.dirname(filename)
     if not os.path.exists(dirname):

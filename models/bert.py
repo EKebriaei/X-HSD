@@ -105,6 +105,29 @@ class MultilingualBERT(nn.Module):
         logits = outputs[0]
         # return loss, logits
         return logits
+        
+class BERTTWEET_FA(nn.Module):
+    def __init__(self, model_size, args, num_labels=2):
+        super(BERTTWEET_FA, self).__init__()
+        self.model = BertForSequenceClassification.from_pretrained(
+            f'arm-on/BERTweet-FA',
+            num_labels=num_labels,
+            hidden_dropout_prob=args['hidden_dropout'],
+            attention_probs_dropout_prob=args['attention_dropout']
+        )
+
+        # Freeze embeddings' parameters for saving memory
+        # for param in self.model.bert.embeddings.parameters():
+        #     param.requires_grad = False
+
+    def forward(self, inputs, lens, mask, labels=None):
+        outputs = self.model(inputs, attention_mask=mask)
+        logits = outputs[0]
+        # return loss, logits
+        return logits
+        
+    def save(self, filepath):
+        self.model.save_pretrained(filepath)
 
 class GE_BERT(nn.Module):
     def __init__(self, model_size, args, num_labels=2):
