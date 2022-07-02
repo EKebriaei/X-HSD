@@ -490,7 +490,7 @@ def segment_hashtag(sents):
 def task_a(filepath: str, tokenizer, truncate=512, data='en'):
     nums, ids, tweets, label_a, _, _ = read_file(filepath, data=data)
     # tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-    token_ids = [tokenizer.encode(text=tweets[i], add_special_tokens=True, max_length=truncate) for i in range(nums)]
+    token_ids = [tokenizer.encode(text=tweets[i], add_special_tokens=True, max_length=130, truncation=True) for i in range(nums)]
     mask = np.array(get_mask(token_ids))
     lens = get_lens(token_ids)
     token_ids = np.array(pad_sents(token_ids, tokenizer.pad_token_id))
