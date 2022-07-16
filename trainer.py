@@ -167,7 +167,7 @@ class Trainer():
 
         loss /= iters_per_epoch
         f1 = f1_score(labels_all, y_pred_all, average='macro')
-        target_names = ['OFF', 'NOT', 'HATE']
+        target_names = ['OFF', 'NOT', 'RELIG', 'NATIO', 'RACE']
         np.savetxt(str(epoch)+'.out', y_pred_all, delimiter=',') 
         
         # offset = 1000
@@ -183,7 +183,7 @@ class Trainer():
             # self.plot_confusion_matrix(cm, target_names)
 
         print(classification_report(labels_all, y_pred_all, target_names=target_names))
-        cm = confusion_matrix(labels_all, y_pred_all, labels=[0, 1, 2])
+        cm = confusion_matrix(labels_all, y_pred_all, labels=[0, 1, 2, 3, 4])
         disp = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=target_names)
         disp.plot()
         plt.savefig('./img/cm/' + str(epoch) + '-all' +'.png')

@@ -15,5 +15,5 @@ LABEL_DICT_EN_DE = {
     'a': {'OFFENSE': 0, 'OTHER': 1, 'OFF': 0, 'NOT': 1},
 }
 LABEL_DICT_FA = {
-    'a': {'OFF': 0, 'NOT': 1, 'HATE': 2},
+    'a': {'OFF': 0, 'NOT': 1, 'RELIG': 2, 'NATIO': 3, 'RACE': 4},
 }
