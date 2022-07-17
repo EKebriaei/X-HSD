@@ -3,7 +3,7 @@ import copy
 import datetime
 from typing import Dict, List
 # Third-party libraries
-import numpy as np
+import numpy as np, os
 import torch
 from torch import nn
 from torch.utils.data import DataLoader
@@ -14,7 +14,7 @@ from tqdm import tqdm
 import matplotlib.pyplot as plt
 import itertools
 # Local files
-from utils import save
+from utils import save, save_hugging_face
 from config import LABEL_DICT_OLID
 
 class Trainer():
@@ -210,7 +210,9 @@ class Trainer():
             filename = f'./save/models/{self.task_name}_{self.model_name}_{self.best_test_f1_m[0]}_seed{self.seed}.pt'
         else:
             filename = f'./save/models/{self.task_name}_{self.model_name}_{self.best_test_f1}_seed{self.seed}.pt'
-        save(copy.deepcopy(self.model.state_dict()), filename)
+        dirname = f'./save/models'
+        save_hugging_face(self.model, dirname)
+        # save(copy.deepcopy(self.model.state_dict()), filename)
 
     def plot_confusion_matrix(cm,
                             target_names,
